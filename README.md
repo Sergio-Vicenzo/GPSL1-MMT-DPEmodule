@@ -99,7 +99,9 @@ Sergio Vicenzo is currently a PhD candidate at the Department of Aeronautical an
 Email: <seergio.vicenzo@connect.polyu.hk>
 
 ## Disclaimer
-I, Sergio Vicenzo, hereby do not claim ownership nor any responsibility for the SoftGNSS v3.0 software by Prof. Kai Borre and Prof. Dennis M. Akos and the `llh2xyz.m` script by Prof. Todd Walter. All changes made to the SoftGNSS v3.0 software have been labelled appropriately and its GNU license has been kept intact in each code file, in accordance to GNU General Public License. No changes were made to the `llh2xyz.m` script and its copyright statement is kept intact.
+I, Sergio Vicenzo, hereby do not claim ownership nor any responsibility for the SoftGNSS v3.0 software by Prof. Kai Borre and Prof. Dennis M. Akos and the `llh2xyz.m` script by Prof. Todd Walter. `tracking_MMT.m` is extended from `tracking.m` from SoftGNSS v3.0.
+
+All changes made to the SoftGNSS v3.0 software (including `tracking_MMT.m`) have been labelled appropriately and its GNU license has been kept intact in each code file, in accordance to GNU General Public License. No changes were made to the `llh2xyz.m` script and its copyright statement is kept intact.
 
 No copyright infringement is intended from any of the MATLAB scripts provided in this GitHub repository.
 
