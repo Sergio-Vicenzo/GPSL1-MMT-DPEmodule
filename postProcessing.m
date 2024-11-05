@@ -135,6 +135,7 @@ if (fid > 0)
 %% Track the signal =======================================================
 if settings.MMT ~= 1
     % If MMT is activated, MMT-aided tracking will be used
+    % Added by Sergio Vicenzo - 5 Nov 2024
     if ~exist([settings.outfile_root, '\trackResults_gps_', settings.outfile_root...
             ,'_',num2str(settings.dllCorrelatorSpacing),'.mat'])
         startTime = now;
@@ -151,7 +152,6 @@ if settings.MMT ~= 1
         disp('   Saving Acq & Tracking results to file "trackingResults.mat"')
     
         % === Saves tracking result to folder =================================
-        % Added by Sergio Vicenzo - 14 Feb 2024
         save([settings.outfile_root, '\trackResults_gps_', ...
             settings.outfile_root,'_',...
             num2str(settings.dllCorrelatorSpacing),'.mat'],...
@@ -165,7 +165,6 @@ if settings.MMT ~= 1
         new_settings = settings;
     
         % === Loads prev tracking result ======================================
-        % Added by Sergio Vicenzo - 14 Feb 2024
         load([settings.outfile_root, '\trackResults_gps_',...
             settings.outfile_root,'_',num2str(settings.dllCorrelatorSpacing),'.mat']);
         settings=new_settings;
@@ -204,8 +203,7 @@ else
         
         else
         
-         % === In case of new settings, save new settings to tracking file =====
-        % Added by Sergio Vicenzo - 13 Feb 2024
+        % === In case of new settings, save new settings to tracking file =====
         new_settings = settings;
     
         % === Loads prev tracking result ======================================
