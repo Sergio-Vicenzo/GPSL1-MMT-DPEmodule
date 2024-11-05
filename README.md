@@ -17,7 +17,7 @@ Tang et al. (2024) had also recently showed that while DPE remains more accurate
 
 To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. 
 
-MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking (`tracking_MMT.m`) to act as the reference code delay for the peak of the ACF. The original DPE_module.m from [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule) has been extended to `DPE_module v2.0` perform this feature. 
+MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking (`tracking_MMT.m`) to act as the reference code delay for the peak of the ACF. The original `DPE_module.m` from [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule) has been extended to `DPE_module v2.0` perform this feature. 
 
 Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
 
