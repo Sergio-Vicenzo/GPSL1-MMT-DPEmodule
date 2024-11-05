@@ -15,9 +15,13 @@ Though DPE has been proven to be robust against MP, previous research has proved
 
 Tang et al. (2024) had also recently showed that while DPE remains more accurate in comparison to 2SP in harsh cases such as 4 out of 8 satellites being MP, DPE error still reaches up to tens, or even hundreds of meters with NLOS measurements, which makes it definitely unsuitable for urban positioning. With research into mitigating MP with 2SP has been widely explored, the prevalence and need for DPE as a robust positioning method against MP has diminished significantly, especially with its high computational load and inapplicability to commercial receivers producing RINEX-level measurements.
 
-To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking (`tracking_MMT.m`) to act as the reference code delay for the peak of the ACF. The original DPE_module.m from [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule) has been extended to `DPE_module v2.0` perform this feature. Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
+To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking (`tracking_MMT.m`) to act as the reference code delay for the peak of the ACF. The original DPE_module.m from [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule) has been extended to `DPE_module v2.0` perform this feature. 
 
-Parts of SoftGNSS v3.0 have been adapted to allow both `tracking_MMT.m` and `DPE_module v2.0` to be integrated into it. This software can run both conventional DPE as well as MMT-integrated DPE. Both both `tracking_MMT.m` and `DPE_module v2.0` can be integrated into any 2Sp MATLAB Software Defined Receivers (SDRs) the same way as [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
+Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
+
+Parts of SoftGNSS v3.0 have been adapted to allow both `tracking_MMT.m` and `DPE_module v2.0` to be integrated into it. This software can run both conventional DPE as well as MMT-integrated DPE. 
+
+Both `tracking_MMT.m` and `DPE_module v2.0` can be integrated into any 2SP MATLAB Software Defined Receivers (SDRs) the same way as [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
 
 ## Running the software
 
@@ -46,7 +50,9 @@ All `DPE_module v2.0` and `tracking_MMT.m` parameters can be edited from `initSe
 
 8. `settings.chipspacing_dpe_precalc` = Chip spacings between the pre-calculated correlations (Default = chips/sample)
 
-9. `settings.MMT_const ` = Relative amplitude constraint for MMT. If settings.MMT_const  = 1, reflected path amplitude is assumed to be able to have the same amplitude as the LOS path (Default = 0.8)
+9. `settings.MMT` = 1 (Activate MMT-integrated DPE and 2SP) or 0 (Perform conventional DPE and 2SP)
+
+10. `settings.MMT_const ` = Relative amplitude constraint for MMT (Default = 0.8)
 
 ## Dependencies
 
@@ -86,7 +92,7 @@ The datasets have the following configuration.
 
 ## Author
 
-MMT-DPE_module v1.0 was written by Sergio Vicenzo.
+`tracking_MMT.m` and `DPE_module v2.0` was written by Sergio Vicenzo.
 
 Sergio Vicenzo is currently a PhD candidate at the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University. He received first-class honours in Bachelor of Engineering in Aviation Engineering from the same university in 2022. He is supervised by Assistant Professor Bing Xu, and co-supervised by Associate Professor Li-Ta Hsu. His research interests include GNSS urban navigation and positioning with direct position estimation.
 
