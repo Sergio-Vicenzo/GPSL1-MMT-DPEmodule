@@ -11,7 +11,7 @@ The Hong Kong Polytechnic University
 ## Introduction
 MMT-integrated DPE is an extension of our previously introduced [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
 
-Though DPE has been proven to be robust against MP, previous research has proved that its superior performance against two-step positioning (2SP) typically falters in deep urban environments where MP and NLOS are the majority of signals received (Vicenzo et al. 2023). This does not necessarily mean that the performance of DPE is worse than 2SP, but rather that its performance is depreciated to a large degree with increasing errors from MP and NLOS the same way 2SP does. 
+Though DPE has been proven to be robust against MP, previous research has proved that its superior performance against two-step positioning (2SP) typically falters in deep urban environments where multipath (MP) and non-line-of-sight (NLOS) are the majority of signals received (Vicenzo et al. 2023). This does not necessarily mean that the performance of DPE is worse than 2SP, but rather that its performance is depreciated to a large degree with increasing errors from MP and NLOS the same way 2SP does. 
 
 Tang et al. (2024) had also recently showed that while DPE remains more accurate in comparison to 2SP in harsh cases such as 4 out of 8 satellites being MP, DPE error still reaches up to tens, or even hundreds of meters with NLOS measurements, which makes it definitely unsuitable for urban positioning. With research into mitigating MP with 2SP has been widely explored, the prevalence and need for DPE as a robust positioning method against MP has diminished significantly, especially with its high computational load and inapplicability to commercial receivers producing RINEX-level measurements.
 
