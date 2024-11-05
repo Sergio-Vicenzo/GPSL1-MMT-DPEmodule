@@ -56,7 +56,7 @@ All `DPE_module v2.0` and `tracking_MMT.m` parameters can be edited from `initSe
 
 ## Dependencies
 
-This software requires the Parallel Computing Toolbox from MATLAB to accelerate MMT computation at `tracking_MMT.m`.
+This software requires the `Parallel Computing Toolbox` from MATLAB to accelerate MMT computation at `tracking_MMT.m`.
 
 `tracking_MMT.m` and `DPE_module v2.0` were developed with MATLAB2022a and it is recommended to run the program with the same version or later. Running the program with other MATLAB versions has yet to be tested. No additional MATLAB toolbox is required i.e., it can run with just the basic MATLAB package and no additional toolboxes.
 
