@@ -25,7 +25,7 @@ Parts of SoftGNSS v3.0 have been adapted to allow both `tracking_MMT.m` and `DPE
 
 Both `tracking_MMT.m` and `DPE_module v2.0` can be integrated into any 2SP MATLAB Software Defined Receivers (SDRs) the same way as [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule), as illustrated below.
 
-![DPE plug-in module figure]([https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule/blob/main/DPE%20correlogram.jpg](https://github.com/Sergio-Vicenzo/GPSL1-MMT-DPEmodule/blob/main/DPE%20plug-in%20module%20figure.jpg))
+![DPE plug-in module figure](https://github.com/Sergio-Vicenzo/GPSL1-MMT-DPEmodule/blob/main/DPE%20plug-in%20module%20figure.jpg)
 
 ## Running the software
 
