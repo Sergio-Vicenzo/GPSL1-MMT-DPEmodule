@@ -1,4 +1,4 @@
-# GPSL1-MMT-DPEmodule v1.0
+# MMT-DPEmodule v1.0
 An open-source GNSS Multipath Mitigation Technology-integrated Direct Position Estimation Plug-in Module for Two-Step Positioning SDRs, integrated into SoftGNSS v3.0 by Borre et al. (2007)
 
 [Intelligent Positioning and Navigation Laboratory (IPNL)](https://www.polyu.edu.hk/aae/ipn-lab/us/index.html) / [PNT Signal Processing Group](https://pbingxu.github.io/team/)
@@ -9,27 +9,26 @@ The Hong Kong Polytechnic University
 ---
 
 ## Introduction
-DPE_module v1.0 is a Direct Position Estimation (DPE) plug-in module that can be integrated into existing two-step positioning (2SP) MATLAB SDRs. 2SP information, namely tracking code phase, signal transmission time, receiver local time, satellite position from Least Squares, satellite clock bias, and Least Squares position solution, are used as input for the plug-in module. 
+MMT-DPE_module v1.0 is an extension of our previously introduced [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
 
-Programmed in a user-friendly language, MATLAB, DPE_module v1.0 is aimed for better understanding and familiarity of a practical implementation of DPE. In this repository, DPE_module v1.0 is integrated into the SoftGNSS MATLAB GPS L1 C/A 2SP SDR from Borre et al. (2007), which is based on Scalar Tracking Loop (STL). But integration of DPE_module v1.0 is not restricted to an STL-based receiver and can be integrated with other 2SP architectures, such as Vector Tracking Loop (VTL). Additionally, the GNSS constellation is not restricted to GPS L1 C/A, but is also integrable with SDRs working with other BPSK-modulated GNSS signals. 
+Though DPE has been proven to be robust against MP, previous research has proved that its superior performance against two-step positioning (2SP) typically falters in deep urban environments where MP and NLOS are the majority of signals received (Vicenzo et al. 2023). This does not necessarily mean that the performance of DPE is worse than 2SP, but rather that its performance is depreciated to a large degree with increasing errors from MP and NLOS the same way 2SP does. 
 
-DPE_module v1.0 would use the grid-based method, by which of establishing a set of candidate position, velocity, and time (PVT) and obtaining the correlations from each satellite before finally non-coherently summing them up to obtain the candidate position with the highest signal correlation, which would be the PVT estimate of DPE. Position as well as receiver clock bias estimate from 2SP are also used as initialization for the grid of candidate position. An illustration is provided below (Vicenzo et al. 2024)
+Tang et al. (2024) had also recently showed that while DPE remains more accurate in comparison to 2SP in harsh cases such as 4 out of 8 satellites being MP, DPE error still reaches up to tens, or even hundreds of meters with NLOS measurements, which makes it definitely unsuitable for urban positioning. With research into mitigating MP with 2SP has been widely explored, the prevalence and need for DPE as a robust positioning method against MP has diminished significantly, especially with its high computational load and inapplicability to commercial receivers producing RINEX-level measurements.
 
-![DPE correlogram illustration](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule/blob/main/DPE%20correlogram.jpg)
+To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking to act as the reference code delay for the peak of the ACF. Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
 
-Instead of iteratively computing the signal correlations per every candidate position, our DPE plug-in module pre-calculates the correlations per every pre-determined chip spacing or code phase. This implementation was previously used by previous research on collective detection, which is another name for DPE, to save computational time (Axelrad et al., 2009; Cheong et al., 2011). 
-
-Parts of SoftGNSS v3.0 have been adapted to allow the DPE_module v1.0 to be integrated into it. 
+Parts of SoftGNSS v3.0 have been adapted to allow the MMT-DPE_module v1.0 to be integrated into it. 
 
 ## Running the software
-The software presented in this repository is a SoftGNSS v3.0 that has been integrated with DPE_Module v1.0, and using it follows the same steps as running a regular SoftGNSS v3.0. Modifications were made to SOftGNSS v3.0 to also run on 16-bit samples (`int16` or `short` data types). 
+
+The software presented in this repository is a SoftGNSS v3.0 that has been integrated with MMT-DPE_module v1.0, and using it follows the same steps as running a regular SoftGNSS v3.0. Modifications were made to SOftGNSS v3.0 to also run on 16-bit samples (`int16` or `short` data types). 
 
 When running with 16-bit data samples, use `int16` in `settings.dataType` (instead of `short`). On the other hand, use `schar` in `settings.dataType` (instead of `int8`) when running with 8-bit data samples.
 
 Further information on using the software can be found in the original SoftGNSS v3.0 readme `readme - SoftGNSS.txt` and ppt `GPS_L1_CA_SDR.pdf`.
 
-## DPE_module configuration
-All DPE_module v1.0 parameters can be edited from `initSettings.m`, which are listed below.
+## MMT-DPE_module configuration
+All MMT-DPE_module v1.0 parameters can be edited from `initSettings.m`, which are listed below.
 
 1. `settings.candPVT_spacing` = Grid spacing for the latitude-longitude-height estimation (Default = 1 meter)
 
@@ -47,8 +46,13 @@ All DPE_module v1.0 parameters can be edited from `initSettings.m`, which are li
 
 8. `settings.chipspacing_dpe_precalc` = Chip spacings between the pre-calculated correlations (Default = chips/sample)
 
+9. `settings.MMT_const ` = Relative amplitude constraint for MMT. If settings.MMT_const  = 1, reflected path amplitude is assumed to be able to have the same amplitude as the LOS path (Default = 0.8)
+
 ## Dependencies
-DPE_module v1.0 was developed with MATLAB2022a and it is recommended to run the program with the same version or later. Running the program with other MATLAB versions has yet to be tested. No additional MATLAB toolbox is required i.e., it can run with just the basic MATLAB package and no additional toolboxes.
+
+This software requires the Parallel Computing Toolbox from MATLAB to accelerate MMT computation at 2SP tracking.
+
+MMT-DPE_module v1.0 was developed with MATLAB2022a and it is recommended to run the program with the same version or later. Running the program with other MATLAB versions has yet to be tested. No additional MATLAB toolbox is required i.e., it can run with just the basic MATLAB package and no additional toolboxes.
 
 Dependencies of the underlying SoftGNSS v3.0 can be found in its readme file `readme - SoftGNSS.txt`
 
@@ -82,7 +86,7 @@ The datasets have the following configuration.
 
 ## Author
 
-DPE_module v1.0 was written by Sergio Vicenzo, inspired by the multicorrelator-based DPE (Corr-DPE) written by HaoSheng Xu and Dr. Bing Xu, which was previously introduced in (Vicenzo et al. 2023).
+MMT-DPE_module v1.0 was written by Sergio Vicenzo.
 
 Sergio Vicenzo is currently a PhD candidate at the Department of Aeronautical and Aviation Engineering, The Hong Kong Polytechnic University. He received first-class honours in Bachelor of Engineering in Aviation Engineering from the same university in 2022. He is supervised by Assistant Professor Bing Xu, and co-supervised by Associate Professor Li-Ta Hsu. His research interests include GNSS urban navigation and positioning with direct position estimation.
 
@@ -94,21 +98,18 @@ I, Sergio Vicenzo, hereby do not claim ownership nor any responsibility for the 
 No copyright infringement is intended from any of the MATLAB scripts provided in this GitHub repository.
 
 ## References
-Axelrad P, Donna J, Mitchell M (2009) Enhancing GNSS acquisition by combining signals from multiple channels and satellites. In: Proc. ION GNSS 2009, Institute of Navigation, Savannah, Georgia, USA, September 22 – 25, 3117-3128
 
-Borre K, Akos DM, Bertelsen N, Rinder P, Jensen SH (2007) [A Software-Defined GPS and Galileo Receiver: A Single-Frequency Approach](https://link.springer.com/book/10.1007/978-0-8176-4540-3). Birkhäuser, Boston, Massachusetts.
-
-Cheong JW, Wu J, Dempster AG, Rizos C (2011) Efficient Implementation of Collective Detection. In: Proc. IGNSS Symposium 2011, International Global Navigation Satellite Systems Society, Sydney, New South Wales, Australia, November 15-17.
+Tang S, Li H, Closas P (2024) Assessment of Direct Position Estimation Performance in Multipath Channels. In: Proc. ION GNSS+ 2024, Institute of Navigation, Baltimore, Maryland, USA, September 16 - 20, 3705 - 3714.
 
 Vicenzo S, Xu B, Dey A, Hsu L-T (2023) Experimental Investigation of GNSS Direct Position Estimation in Densely Urban Area. In: In: Proc. ION GNSS+ 2023, Institute of Navigation, Denver, Colorado, USA, September 19 – 23, 2906-2919.
 
-Vicenzo S, Xu B, Xu H, Hsu L-T (2024) GNSS direct position estimation-inspired positioning with pseudorange correlogram for urban navigation. GPS Solutions 28(2). https://doi.org/10.1007/s10291-024-01627-5
+Weill LR (2002) Multipath Mitigation using Modernized GPS Signals: How Good Can it Get?. In: Proc. ION GPS 2002, Institute of Navigation, Portland, Oregon, USA, September 24 - 27, 493 - 505.
 
 ## Note
 This repository is still under development. I apologise if some information is incomplete or if you encounter any problems...
 
 If you have any questions, drop an email at <seergio.vicenzo@connect.polyu.hk>!
 
-Last Updated: 03 Nov 2024
+Last Updated: 05 Nov 2024
 
 	   
