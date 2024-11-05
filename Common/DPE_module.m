@@ -47,7 +47,7 @@ function [navSolutions]=DPE_module...
 %       DPE_clkBias     - Estimated receiver clock bias from DPE
 
 % -------------------------------------------------------------------------
-% ------------------------ DPE_module v1.0 --------------------------------
+% ------------------------ DPE_module v2.0 --------------------------------
 %   Copyright (C) 2024 Sergio Vicenzo
 %   Written by Sergio Vicenzo
 % -------------------------------------------------------------------------
@@ -296,13 +296,10 @@ if settings.MMT == 1
 
         [~,Index_Max] = max(precalc_correlations(prn_index,3));
 
-         clear precalc_corr_persat
-
         precalc_correlations(prn_index,2)= precalc_correlations(prn_index,2)...
         -((chip_spacings(Index_Max)-chip_spacings(find(chip_spacings==0)))...
         /settings.codeFreqBasis) * settings.c;% + ...
-
-               
+    
     end  
 end
 
