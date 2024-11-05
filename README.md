@@ -1,4 +1,4 @@
-# MMT-DPEmodule v1.0
+# MMT-integrated DPE
 An open-source GNSS Multipath Mitigation Technology-integrated Direct Position Estimation Plug-in Module for Two-Step Positioning SDRs, integrated into SoftGNSS v3.0 by Borre et al. (2007)
 
 [Intelligent Positioning and Navigation Laboratory (IPNL)](https://www.polyu.edu.hk/aae/ipn-lab/us/index.html) / [PNT Signal Processing Group](https://pbingxu.github.io/team/)
@@ -9,26 +9,26 @@ The Hong Kong Polytechnic University
 ---
 
 ## Introduction
-MMT-DPE_module v1.0 is an extension of our previously introduced [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
+MMT-integrated DPE is an extension of our previously introduced [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
 
 Though DPE has been proven to be robust against MP, previous research has proved that its superior performance against two-step positioning (2SP) typically falters in deep urban environments where MP and NLOS are the majority of signals received (Vicenzo et al. 2023). This does not necessarily mean that the performance of DPE is worse than 2SP, but rather that its performance is depreciated to a large degree with increasing errors from MP and NLOS the same way 2SP does. 
 
 Tang et al. (2024) had also recently showed that while DPE remains more accurate in comparison to 2SP in harsh cases such as 4 out of 8 satellites being MP, DPE error still reaches up to tens, or even hundreds of meters with NLOS measurements, which makes it definitely unsuitable for urban positioning. With research into mitigating MP with 2SP has been widely explored, the prevalence and need for DPE as a robust positioning method against MP has diminished significantly, especially with its high computational load and inapplicability to commercial receivers producing RINEX-level measurements.
 
-To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking to act as the reference code delay for the peak of the ACF. Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
+To solve this issue for DPE, we to introduce a Multipath Mitigation Technology (MMT)-integrated DPE. MMT was introduced as an efficient estimator for accurate estimation of the code delays and carrier phase of the LOS and reflected signal (Weill 2002). In 2SP, the natural way to apply MMT is to integrate it at the tracking stage, replacing the discriminator. MMT-integrated DPE would use the code delays estimated from an MMT-aided tracking (`tracking_MMT.m`) to act as the reference code delay for the peak of the ACF. The original DPE_module.m from [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule) has been extended to `DPE_module v2.0` perform this feature. Since DPE traditionally does not require estimation of code delays, the MMT-integrated DPE is introduced as a variant of DPE instead, one that is specifically designed for urban environments. 
 
-Parts of SoftGNSS v3.0 have been adapted to allow the MMT-DPE_module v1.0 to be integrated into it. 
+Parts of SoftGNSS v3.0 have been adapted to allow both `tracking_MMT.m` and `DPE_module v2.0` to be integrated into it. This software can run both conventional DPE as well as MMT-integrated DPE. Both both `tracking_MMT.m` and `DPE_module v2.0` can be integrated into any 2Sp MATLAB Software Defined Receivers (SDRs) the same way as [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
 
 ## Running the software
 
-The software presented in this repository is a SoftGNSS v3.0 that has been integrated with MMT-DPE_module v1.0, and using it follows the same steps as running a regular SoftGNSS v3.0. Modifications were made to SOftGNSS v3.0 to also run on 16-bit samples (`int16` or `short` data types). 
+The software presented in this repository is a SoftGNSS v3.0 that has been integrated with `tracking_MMT.m` and `DPE_module v2.0`, and using it follows the same steps as running a regular SoftGNSS v3.0. Modifications were made to SoftGNSS v3.0 to also run on 16-bit samples (`int16` or `short` data types). 
 
 When running with 16-bit data samples, use `int16` in `settings.dataType` (instead of `short`). On the other hand, use `schar` in `settings.dataType` (instead of `int8`) when running with 8-bit data samples.
 
 Further information on using the software can be found in the original SoftGNSS v3.0 readme `readme - SoftGNSS.txt` and ppt `GPS_L1_CA_SDR.pdf`.
 
 ## MMT-DPE_module configuration
-All MMT-DPE_module v1.0 parameters can be edited from `initSettings.m`, which are listed below.
+All `DPE_module v2.0` and `tracking_MMT.m` parameters can be edited from `initSettings.m`, which are listed below.
 
 1. `settings.candPVT_spacing` = Grid spacing for the latitude-longitude-height estimation (Default = 1 meter)
 
@@ -50,9 +50,9 @@ All MMT-DPE_module v1.0 parameters can be edited from `initSettings.m`, which ar
 
 ## Dependencies
 
-This software requires the Parallel Computing Toolbox from MATLAB to accelerate MMT computation at 2SP tracking.
+This software requires the Parallel Computing Toolbox from MATLAB to accelerate MMT computation at `tracking_MMT.m`.
 
-MMT-DPE_module v1.0 was developed with MATLAB2022a and it is recommended to run the program with the same version or later. Running the program with other MATLAB versions has yet to be tested. No additional MATLAB toolbox is required i.e., it can run with just the basic MATLAB package and no additional toolboxes.
+`tracking_MMT.m` and `DPE_module v2.0` were developed with MATLAB2022a and it is recommended to run the program with the same version or later. Running the program with other MATLAB versions has yet to be tested. No additional MATLAB toolbox is required i.e., it can run with just the basic MATLAB package and no additional toolboxes.
 
 Dependencies of the underlying SoftGNSS v3.0 can be found in its readme file `readme - SoftGNSS.txt`
 
