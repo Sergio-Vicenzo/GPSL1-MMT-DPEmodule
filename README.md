@@ -48,15 +48,17 @@ All `DPE_module v2.0` and `tracking_MMT.m` parameters can be edited from `initSe
 
 5. `settings.DPE_nonCohInt` = DPE non-coherent integration time (Default = 1 ms) to improve the performance of DPE as the satellite correlations would be more filtered
 
-6. `settings.DPE_plotCorrelogram` = Output the correlograms, plotted at the estimated DPE height
+6. `settings.DPE_CohInt` = DPE coherent integration time (Default = 1 ms) to improve the performance of DPE against MP
 
-7. `settings.gt_llh` = Ground truth coordinates in geodetic coordinates to output the positioning errors from both DPE and 2SP
+7. `settings.DPE_plotCorrelogram` = Output the correlograms, plotted at the estimated DPE height
 
-8. `settings.chipspacing_dpe_precalc` = Chip spacings between the pre-calculated correlations (Default = chips/sample)
+8. `settings.gt_llh` = Ground truth coordinates in geodetic coordinates to output the positioning errors from both DPE and 2SP
 
-9. `settings.MMT` = 1 (Activate MMT-integrated DPE and 2SP) or 0 (Perform conventional DPE and 2SP)
+9. `settings.chipspacing_dpe_precalc` = Chip spacings between the pre-calculated correlations (Default = chips/sample)
 
-10. `settings.MMT_const ` = Relative amplitude constraint for MMT (Default = 0.8)
+10. `settings.MMT` = 1 (Activate MMT-integrated DPE and 2SP) or 0 (Perform conventional DPE and 2SP)
+
+11. `settings.MMT_const ` = Relative amplitude constraint for MMT (Default = 0.8)
 
 ## Dependencies
 
