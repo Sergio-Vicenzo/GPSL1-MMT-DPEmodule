@@ -327,6 +327,7 @@ for channelNr = 1:settings.numberOfChannels
 
             %% Multipath Mitigation Technology (MMT) ----------------------------------
             % Generate grid of LOS and reflected path delay
+	    % Added by Sergio Vicenzo - 5 Nov 2024
             codeDelay_NLOS = LOS_codeDelay-0.1:0.005:LOS_codeDelay+0.5;
             codeDelay_LOS  = LOS_codeDelay-0.1:0.005:LOS_codeDelay+0.1;
             MMT_cost_func3 = zeros(length(codeDelay_LOS),length(codeDelay_NLOS));
@@ -456,21 +457,25 @@ for channelNr = 1:settings.numberOfChannels
             end % End for delay1
 
             % Maximise MMT cost function
+	    % Added by Sergio Vicenzo - 5 Nov 2024
             [MaxCorrValue,~] = max(MMT_cost_func3,[],'all','linear');
         
             [codeDelay_LOS_indx,codeDelay_NLOS_indx,~] = ...
                 find(MMT_cost_func3==MaxCorrValue); 
                    
             % Obtain LOS code delay
+	    % Added by Sergio Vicenzo - 5 Nov 2024
             trackResults(channelNr).MMT_codeDelay_LOS(loopCnt)...
                  = mean(codeDelay_LOS(codeDelay_LOS_indx));
             LOS_delay = mean(codeDelay_LOS(codeDelay_LOS_indx));
     
             % Obtain reflected path code delay
+	    % Added by Sergio Vicenzo - 5 Nov 2024
             trackResults(channelNr).MMT_codeDelay_NLOS(loopCnt)...
                  = mean(codeDelay_NLOS(codeDelay_NLOS_indx));
     
             % Obtain relative delay of reflected path
+	    % Added by Sergio Vicenzo - 5 Nov 2024
             trackResults(channelNr).MMT_codeDelay_NLOS_relative(loopCnt)...
                 =  abs(mean(codeDelay_NLOS(codeDelay_NLOS_indx)) - ...
                 mean(codeDelay_LOS(codeDelay_LOS_indx)));
