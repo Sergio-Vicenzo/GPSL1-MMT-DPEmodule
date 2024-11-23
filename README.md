@@ -6,7 +6,7 @@ An open-source GNSS Multipath Mitigation Technology-integrated Direct Position E
 The Hong Kong Polytechnic University
 
 ## Related Publication
-[Multipath Mitigation Technology-integrated GNSS Direct Position Estimation Plug-in Module](https://doi.org/10.48550/arXiv.2411.13339)
+[Multipath Mitigation Technology-integrated GNSS Direct Position Estimation Plug-in Module](https://www.researchgate.net/publication/386013941_Multipath_Mitigation_Technology-integrated_GNSS_Direct_Position_Estimation_Plug-in_Module)
 
 ## Introduction
 MMT-integrated DPE is an extension of our previously introduced [DPE_module v1.0](https://github.com/Sergio-Vicenzo/GPSL1-DPEmodule).
