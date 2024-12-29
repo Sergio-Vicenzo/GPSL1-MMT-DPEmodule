@@ -287,7 +287,7 @@ for channelNr = 1:settings.numberOfChannels
             %% Compute multicorrelators -----------------------------------------------
             % Added by Sergio Vicenzo - Added on 5 Nov 2024
             if loopCnt < 1000
-                chip_spacings = [-(flip(0.02:0.02:0.3)),0,0.02:0.02:0.4];
+                chip_spacings = [-(flip(0.02:0.02:0.4)),0,0.02:0.02:0.4];
             else
                 chip_spacings = [-(flip(0.02:0.02:0.3)),0,0.02:0.02:0.3];
             end
