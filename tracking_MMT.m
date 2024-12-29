@@ -287,9 +287,9 @@ for channelNr = 1:settings.numberOfChannels
             %% Compute multicorrelators -----------------------------------------------
             % Added by Sergio Vicenzo - Added on 5 Nov 2024
             if loopCnt < 1000
-                chip_spacings = [-(flip(0.1:0.1:0.4)),0,0.1:0.1:0.4];
+                chip_spacings = [-(flip(0.02:0.02:0.3)),0,0.02:0.02:0.4];
             else
-                chip_spacings = [-(flip(0.1:0.1:0.3)),0,0.1:0.1:0.3];
+                chip_spacings = [-(flip(0.02:0.02:0.3)),0,0.02:0.02:0.3];
             end
 
             count = 1;
@@ -329,8 +329,8 @@ for channelNr = 1:settings.numberOfChannels
             %% Multipath Mitigation Technology (MMT) ----------------------------------
             % Generate grid of LOS and reflected path delay
 	        % Added by Sergio Vicenzo - 5 Nov 2024
-            codeDelay_NLOS = LOS_codeDelay-0.3:0.005:LOS_codeDelay+0.5;
-            codeDelay_LOS  = LOS_codeDelay-0.3:0.005:LOS_codeDelay+0.1;
+            codeDelay_NLOS = LOS_codeDelay-0.1:0.005:LOS_codeDelay+0.5;
+            codeDelay_LOS  = LOS_codeDelay-0.1:0.005:LOS_codeDelay+0.1;
             MMT_cost_func3 = nan(length(codeDelay_LOS),...
                                 length(codeDelay_NLOS));
 
