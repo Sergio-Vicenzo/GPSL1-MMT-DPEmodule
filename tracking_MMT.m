@@ -633,10 +633,7 @@ for channelNr = 1:settings.numberOfChannels
             % DLL error now defined by LOS delay from MMT
             % Added by Sergio Vicenzo - 5 Nov 2024
             codeError = LOS_delay;
-            if (NLOS_amp / LOS_amp) > 1.5 && (NLOS_delay-LOS_delay) >= 0.06
-            codeError = NLOS_delay;
-            end
-
+            
             % Implement code loop filter and generate NCO command
             codeNco = oldCodeNco + (tau2code/tau1code) * ...
                 (codeError - oldCodeError) + codeError * (PDIcode/tau1code);
